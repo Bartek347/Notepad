@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Notatnik</title>
+</head>
+<body>
+<h1>
+	Notatnik
+</h1>
+<table>
+<thead>
+	<tr>
+		<th>Tytuł</th>
+		<th>Data</th>
+		<th>Dodał</th>
+	</tr>
+</thead>
+</table>
+<ul>
+	<?php foreach ($this->note as $n): ?> 
+		<li>
+			<a href="<?php echo $this->url (
+				array(
+						'controller' => 'note',
+						'action' => 'show',
+						'id' => $n->id,
+					 ),
+					 'default'); ?>">
+					 <?php echo $n['title'] . " " . $n['date'] . " " . $n['u_id'] ?>
+			</a>
+		</li>
+	<?php endforeach; ?>
+<ul>
+	</body>
+	</html>

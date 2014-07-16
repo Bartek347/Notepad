@@ -1,0 +1,17 @@
+<html>
+<body>
+<h1>
+	Notatka
+</h1>
+	<?php $this->headTitle($this->note->title) ?>
+	<div>
+		<h2><?php echo $this->note->title ?></h2>
+		<p>
+			<?php echo nl2br($this->note->content_data) ?>
+		</p>
+		<p>
+			<a href="<?php echo $this->url(array(), 'index') ?>">Powrot</a>
+		</p>
+	</div>
+</body>
+</html>
