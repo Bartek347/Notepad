@@ -30,6 +30,7 @@ class NoteClass
         $json_tab = array();
         $i = 0;
         foreach ($not as $n) {
+            $id = $n['id'];
             $tytul = $n['title'];
             $data = $n['date'];
             foreach ($usr as $u) {
@@ -41,11 +42,12 @@ class NoteClass
             $content = $n['content_data'];
 
             $tab = array(
-               'title' => $tytul,
-               'description' => $content,
-               'time' => $data, 
-               'author' => $nazwa,  
-               'username' => $user
+                'id' => $id,
+                'title' => $tytul,
+                'description' => $content,
+                'time' => $data, 
+                'author' => $nazwa,  
+                'username' => $user
             );
             $json_tab[$i] = $tab;
             $i++;
@@ -65,6 +67,7 @@ class NoteClass
         $row = $Notes->fetchRow($not);
         $usr = $Users->fetchAll();
         
+        $id = $row['id'];
         $tytul = $row['title'];
         $data = $row['date'];
         $content = $row['content_data'];
@@ -76,13 +79,17 @@ class NoteClass
         }
 
         $tab = array(
-               'title' => $tytul,
-               'description' => $content,
-               'time' => $data, 
-               'author' => $nazwa
+                'id' => $id,
+                'title' => $tytul,
+                'description' => $content,
+                'time' => $data, 
+                'author' => $nazwa
         );
 
         $show = json_encode($tab);
+        $result = '[' . $show . ']';
+        $xml = '<a>' . $result.'</a>';
+        $show = simplexml_load_string($xml);
         return $show;
     }
 
@@ -109,6 +116,13 @@ class NoteClass
             'u_id'          => $user_id->u_id
             );
         $id = $Notes->insert($data);
+    }
+
+    public function delete($id)
+    {
+        $Notes = new Application_Model_DbTable_Notes();
+        $row = $Notes->find($id)->current();
+        $row->delete();
     }
 }
 
