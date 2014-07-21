@@ -2,20 +2,7 @@
 
 class LoginController extends Zend_Controller_Action
 {
-
-    /*public function preDispatch()
-    {
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-            return $this->_helper->redirector(
-                'index',
-                'login',
-                'default'
-            );
-        }
-        $this->view->identity = $auth->getIdentity();
-    }*/
-
+    
     public function init()
     {
         /* Initialize action controller here */
@@ -23,38 +10,32 @@ class LoginController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->form = new Application_Form_Login();
-    }
-
-    public function loginAction()
-    {
-        $this->_helper->viewRenderer('index');
         $form = new Application_Form_Login();
-        if ($form->isValid($this->getRequest()->getPost())) {
-
+        if ($form->isValid($_POST)) {
             $adapter = new Zend_Auth_Adapter_DbTable(  
-                null,  
-                'user',  
-                'username',  
-                'password',  
-                'MD5(CONCAT(?, salt))'  
+                null,
+                'users',
+                'username', 
+                'password',
+                'md5(?)'
                 );  
 
             $adapter->setIdentity($form->getValue('username'));
             $adapter->setCredential($form->getValue('password'));
 
             $auth = Zend_Auth::getInstance();
-
             $result = $auth->authenticate($adapter);
 
             if ($result->isValid()) {
+                //Zend_Session::rememberMe(60 * 10);
+                Zend_Session::start();
                 return $this->_helper->redirector(
-                    'login',
                     'index',
+                    'disp',
                     'default'
                 );
             }
-            $form->password->addError('Błędna próba logowania!');
+            $form->password->addError('Bledna proba logowania!');
         }
         $this->view->form = $form;
     }
@@ -64,8 +45,8 @@ class LoginController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         $auth->clearIdentity();
         return $this->_helper->redirector(
-            'login',
             'index',
+            'login',
             'default'
         );
     }

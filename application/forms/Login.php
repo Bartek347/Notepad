@@ -7,44 +7,42 @@ class Application_Form_Login extends Zend_Form
     {
         $this->setMethod('post');
 
-        $view = Zend_Layout::getMvcInstance()->getView();
-        $url = $view->url(array(
-            'controller' => 'login', 'action' => 'login'
+        $this->addElement('hidden', 'plaintext', array(
+            'description' => 'Zaloguj się',
+            'ignore' => true,
+            'decorators' => array(
+            array('Description', array('escape'=>false, 'tag'=>'h1')),
+                ),
+            
         ));
-
-        $this->setAction($url);
         
-
-        $this->addElement(
-            'text',
-            'username',
-            array(
-                'label'    => 'Username:',
+        $user = $this->addElement('text', 'username', array(
                 'required' => true,
-                'filters'  => array('StringTrim'),
-            )
-        );
+                'filters'    => array('StringTrim'),
+                'label'    => false,
+                'placeholder' => 'Nazwa Użytkownika',
 
-        $this->addElement(
-            'password',
-            'password',
-            array(
-                'label'    => 'Password:',
-                'required' => true,
-            )
-        );
+            ));
+        $user->removeDecorator('label');
 
-        $this->addElement(
-            'submit',
-            'submit',
-            array(
-                'ignore'   => true,
-                'label'    => 'Login',
-            )
-        );
+        $pass = $this->addElement('password', 'password', array(
+            'required' => true,
+            'placeholder' => 'Hasło',
+            ));
+ 
+        $this->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Zaloguj się',
+            ));
+
+       
+
+             $this->clearDecorators();
+             $this->addDecorator('FormElements')
+                  ->addDecorator('HtmlTag', array('tag' => 'div'))
+                  ->addDecorator('Form');
+
 
     }
-
-
 }
 

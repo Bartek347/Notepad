@@ -31,7 +31,7 @@ CREATE TABLE `notes` (
   PRIMARY KEY (`id`),
   KEY `fk_borrowed` (`u_id`),
   CONSTRAINT `fk_borrowed` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,10 +54,9 @@ CREATE TABLE `users` (
   `u_id` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `salt` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
