@@ -23,7 +23,7 @@
         <section class="Notepad container jumbotron box-shadow" id="notepad" >
             <ul ng-repeat="post in wynik"> 
                 <li class="posty">
-                    <h4>{{post.title}}</h4>
+                    <h4 ng-click="deleteComment($index)">{{post.title}}</h4>
                     <div class='time'>
                         <p>Autor: {{post.author}} </p>
                         <p>Data dodania: {{post.time}}</p>
@@ -31,7 +31,7 @@
                     <p>{{post.description}}</p>
                 </li>
             </ul>
-            <ul ng-show="name">
+            <ul ng-show="show()">
                 <li class="posty">
                     <h4>{{name}}</h4>
                     <div class='time'>

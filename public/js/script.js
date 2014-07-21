@@ -13,7 +13,7 @@ $http({method: 'POST', url: 'http://staze.org/note?method=index'}).success(funct
 
 $scope.submitForm = function()
 	{
-        console.log("posting data....");
+        
         formData = $scope.form;
         console.log(formData);
     	console.log(formData.title);
@@ -21,7 +21,7 @@ $scope.submitForm = function()
 
 		$http({method: 'POST', url: 'http://staze.org/note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
 		 {
-			 console.log("wyslany ajzol....");
+			 console.log("wyslanie postu....");
 			 $scope.form = "";
 		 
 
@@ -31,7 +31,7 @@ $scope.submitForm = function()
 				var str = data;
 				var res = str.substring(25, str.length-5);
 				$scope.wynik = angular.fromJson(res);
-				console.log("odbierany ajzol....");
+				console.log("odbieranie bazy....");
 		    });
 
 
@@ -43,57 +43,30 @@ $scope.submitForm = function()
 // index : index of global DOM
 $scope.deleteComment = function(index){
 // Angular AJAX call
-$http({
-method : "GET",
-url : "index.php?action=delete&id="+$scope.comments[index].id,
+/*method : "POST",
+url : 'http://staze.org/note?method=index'+$scope.wynik[index].id,
 }).success(function(data){
+	console.log("klikanie postu....");
 // Removing Data from Global DOM
-$scope.comments.splice(index,1);
+$scope.wynik.splice(index,1);
 });
-}
-}
-
-
-
-//var demo = angular.module('demo',[]);
-
-
-
-/*demo.controller('PostsCtrlAjax',
-
-function($scope, $http){
-
-$http({method: 'POST', url: 'http://staze.org/note?method=index'}).success(function(data)
+*/
+var test = $scope.wynik[index].id;
+console.log(test);
+$http({method: 'POST', url: 'http://staze.org/note?method=show&id='+$scope.wynik[index].id}).success(function(data)
 			{
 				$scope.posts = data; // response data 
 				var str = data;
 				var res = str.substring(25, str.length-5);
 				$scope.wynik = angular.fromJson(res);
+
+				console.log("klikanie postu....");
+				console.log(data);
+				$scope.wynik.splice(index,1);
 		    });
 
 
+}
+}
 
 
-
-});
-
-demo.controller('FormCtrl',function($scope, $http){
-
-		$scope.submitForm = function() {
-        console.log("posting data....");
-        formData = $scope.form;
-        console.log(formData);
-    	console.log(formData.title);
-		var inde = 'index';
-
-$http({method: 'POST', url: 'http://staze.org/note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
-{
- console.log("wyslany ajzol....");
- });
-
-
-    };
-
-
-});
-*/
