@@ -16,6 +16,11 @@ function commentsController($scope, $http)
 
 
 
+
+	
+	
+
+
 		function request_baza(link) {
 
 		$http({method: 'POST', url: link }).success(function(data)
