@@ -1,3 +1,5 @@
+
+
 body{
 
 	width:100%;
@@ -24,7 +26,11 @@ body{
 	margin-right:10px;
 	margin-top:10px;
 }
+.usun.btn-danger{
 
+	float:right;
+	margin-top:-28px;
+}
 .title{
 
 	margin:30px 0px;
@@ -77,7 +83,12 @@ li .time p{
 
 li.posty{
 
-	height:100px;
+	height: 150px;
+	overflow: hidden;
+}
+li.no_hide{
+height:auto!important;
+
 }
 li.posty p{
 

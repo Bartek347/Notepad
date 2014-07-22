@@ -1,42 +1,59 @@
 <!DOCTYPE html>
+<?php 
+    
+    $link_css = "css/style.css";
+    $link_bootstrap = "css/bootstrap.css";
+    $link_fontello = "css/fontello.css";
+    $font_roboslab = "http://fonts.googleapis.com/css?family=Roboto+Slab";
+    $jquery = "js/jquery-2.1.1.min.js";
+    $domena = "http://staze.org/";
+    $angularjs = "js/angular.js";
+    $skrypt = "js/script.js";
+
+?>
+
 <html ng-app>
 <head>
 <meta charset="utf-8"> 
 <title>Notepad Application</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="<?php echo $this->baseUrl('css/style.css'); ?>" rel="stylesheet">
-<link href="<?php echo $this->baseUrl('css/bootstrap.css'); ?>" rel="stylesheet">
-<link href="<?php echo $this->baseUrl('css/fontello.css'); ?>" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery-2.1.1.min.js'); ?>">
+<link href="<?php echo $this->baseUrl($link_css); ?>" rel="stylesheet">
+<link href="<?php echo $this->baseUrl($link_bootstrap); ?>" rel="stylesheet">
+<link href="<?php echo $this->baseUrl($link_fontello); ?>" rel="stylesheet">
+<link href="<?php echo $font_roboslab ?>" rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="<?php echo $this->baseUrl("$jquery"); ?>">
     </script>
+    <script type="text/javascript">var baseUrl = "<?php echo $this->baseUrl("");?>";
+    alert(baseUrl);</script>
 </head>
     <body ng-controller="commentsController">
         <section class="navbar navbar-inverse navbar-static-top"\>
             <section class="user">
                 <i class="icon-user sf-icon sf-icon-small"></i>
                 <p>{{wynik[0].username}}</p>
-                <a href="http://staze.org/login/logout">Wyloguj</a>
+                <a href="<?php echo $domena ?>login/logout">Wyloguj</a>
             </section>
         </section>
         <h1 class="title text-center">Notepad Application</h1>
         <section class="Notepad container jumbotron box-shadow" id="notepad" >
             <ul ng-repeat="post in wynik"> 
-                <li class="posty">
-                    <h4 ng-click="deleteComment($index)">{{post.title}}</h4>
-                    <div class='time'>
+                <li class="posty" ng-class="$no_high">
+                    <h4  ng-click="showPost($index,$n)">{{post.title}}</h4>
+                    <section class='time'>
                         <p>Autor: {{post.author}} </p>
                         <p>Data dodania: {{post.time}}</p>
-                    </div>
+                    </section>
                     <p>{{post.description}}</p>
+
                 </li>
+                 <button type="submit" ng-click="removePost($index)" class="usun btn btn-danger">Usuń</button>
             </ul>
             <ul ng-show="show()">
                 <li class="posty">
                     <h4>{{name}}</h4>
-                    <div class='time'>
+                    <section class='time'>
                         <p>Autor: {{wynik[0].username}}</p>
-                    </div>
+                    </section>
                     <p>{{notka}}</p>
                 </li>  
             </ul>
@@ -44,18 +61,19 @@
         
         <section class="note container">
             <form class="form-horizontal" role="form" name="saveTemplateData"   ng-submit="submitForm()">
-                <div class="form-group">
+                <section class="form-group">
                     <label for="inputTitle" class="col-sm-1 control-label" >Tytuł</label>
-                    <div class="col-sm-10">
+                    <section class="col-sm-10">
                         <input type="Title" class="form-control" id="inputtitle" placeholder="Tytuł  Notatki"  ng-model="form.title">
                         <textarea class="form-control" rows="3" placeholder="Treść Notatki" ng-model="form.content"></textarea>
                         <button type="submit" ngClick="Submit" class="dodaj btn btn-success">Dodaj</button>
-                    </div>
-                </div>
+                    </section>
+                </section>
             </form>
         </section>
-<script type="text/javascript" src="<?php echo $this->baseUrl('js/angular.js'); ?>"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl("$angularjs"); ?>"></script>
 <script src="<?php echo $this->baseUrl('js/bootstrap.js'); ?>" ></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl('js/script.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("$skrypt"); ?>"></script>
     </body>
 </html>
