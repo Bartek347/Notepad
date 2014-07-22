@@ -14,7 +14,7 @@ function commentsController($scope, $http)
 					{
 						$scope.posts = data; // response data 
 						var str = data;
-						var res = str.substring(25, str.length-5);
+						var res = str.substring(34, str.length-8);
 						$scope.wynik = angular.fromJson(res);
 				    });
 
