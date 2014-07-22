@@ -1,3 +1,5 @@
+
+
 body{
 
 	width:100%;
@@ -24,7 +26,11 @@ body{
 	margin-right:10px;
 	margin-top:10px;
 }
+.usun.btn-danger{
 
+	float:right;
+	margin-top:-28px;
+}
 .title{
 
 	margin:30px 0px;
@@ -52,10 +58,10 @@ body{
 	float:left;
 }	
 .user p{
-margin-left:5px;
+	margin-left:5px;
 }
 .user a{
-margin-left:10px;
+	margin-left:10px;
 }
 .note{
 
@@ -64,20 +70,25 @@ margin-left:10px;
 
 .time{
 
-float:right;
-margin-top: -13px;
-font-size: 13px;
-margin-right: 20px;
+	float:right;
+	margin-top: -13px;
+	font-size: 13px;
+	margin-right: 20px;
 
 }
 li .time p{
-font-size: 13px !important;
-margin-top:-19px;
+	font-size: 13px !important;
+	margin-top:-19px;
 }
 
 li.posty{
 
-height:100px;
+	height: 150px;
+	overflow: hidden;
+}
+li.no_hide{
+height:auto!important;
+
 }
 li.posty p{
 
@@ -88,7 +99,10 @@ li.posty p{
 	display:none;
 }
 
-.container_l { margin: 125px auto; position: relative; width: 900px; }
+.container_l {
+ 	margin: 125px auto; 
+ 	position: relative; 
+ 	width: 900px; }
 #content {
 	background: #f9f9f9;
 	background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);

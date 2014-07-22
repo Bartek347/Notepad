@@ -22,21 +22,23 @@
         <h1 class="title text-center">Notepad Application</h1>
         <section class="Notepad container jumbotron box-shadow" id="notepad" >
             <ul ng-repeat="post in wynik"> 
-                <li class="posty">
-                    <h4>{{post.title}}</h4>
-                    <div class='time'>
+                <li class="posty" ng-class="$no_high">
+                    <h4  ng-click="showPost($index,$n)">{{post.title}}</h4>
+                    <section class='time'>
                         <p>Autor: {{post.author}} </p>
                         <p>Data dodania: {{post.time}}</p>
-                    </div>
+                    </section>
                     <p>{{post.description}}</p>
+
                 </li>
+                 <button type="submit" ng-click="removePost($index)" class="usun btn btn-danger">Usuń</button>
             </ul>
-            <ul ng-show="name">
+            <ul ng-show="show()">
                 <li class="posty">
                     <h4>{{name}}</h4>
-                    <div class='time'>
+                    <section class='time'>
                         <p>Autor: {{wynik[0].username}}</p>
-                    </div>
+                    </section>
                     <p>{{notka}}</p>
                 </li>  
             </ul>
@@ -44,16 +46,17 @@
         
         <section class="note container">
             <form class="form-horizontal" role="form" name="saveTemplateData"   ng-submit="submitForm()">
-                <div class="form-group">
+                <section class="form-group">
                     <label for="inputTitle" class="col-sm-1 control-label" >Tytuł</label>
-                    <div class="col-sm-10">
+                    <section class="col-sm-10">
                         <input type="Title" class="form-control" id="inputtitle" placeholder="Tytuł  Notatki"  ng-model="form.title">
                         <textarea class="form-control" rows="3" placeholder="Treść Notatki" ng-model="form.content"></textarea>
                         <button type="submit" ngClick="Submit" class="dodaj btn btn-success">Dodaj</button>
-                    </div>
-                </div>
+                    </section>
+                </section>
             </form>
         </section>
+
 <script type="text/javascript" src="<?php echo $this->baseUrl('js/angular.js'); ?>"></script>
 <script src="<?php echo $this->baseUrl('js/bootstrap.js'); ?>" ></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl('js/script.js'); ?>"></script>
