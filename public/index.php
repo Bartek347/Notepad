@@ -25,8 +25,6 @@ $application = new Zend_Application(
     APPLICATION_PATH . '/configs/application.ini'
 );
 
-$baseUrl = $application->baseHttp;
-    define('BASE_URL', $baseUrl);
     
 $application->bootstrap()
             ->run();
