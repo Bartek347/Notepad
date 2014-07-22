@@ -29,6 +29,7 @@ class My_Note
         }
 
         $show = $tool->createXml1($json_tab); 
+        
         return $show;
     }
 
