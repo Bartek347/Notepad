@@ -2,7 +2,7 @@ function commentsController($scope, $http)
 {
 
 
-	var link_all = 'http://staze.org/note?method=index';
+	var link_all = baseUrl+'note?method=index';
 
 	console.log(baseUrl);
 
@@ -46,7 +46,7 @@ $scope.submitForm = function()
     	console.log(formData.title);
 		var inde = 'index';
 
-		$http({method: 'POST', url: 'http://staze.org/note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
+		$http({method: 'POST', url: baseUrl+'note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
 		 {
 			 console.log("wyslanie postu....");
 			 $scope.form = "";
@@ -67,7 +67,7 @@ $scope.showPost = function(index,n){
        $scope.no_high = 'no_hide';
        console.log($scope.wynik[index].id);
 
-		$http({method: 'POST', url: 'http://staze.org/note?method=show&id='+$scope.wynik[index].id}).success(function(data)
+		$http({method: 'POST', url: baseUrl+'note?method=show&id='+$scope.wynik[index].id}).success(function(data)
 			{
 				$scope.posts = data; // response data 
 				var res = data_cut(data);
@@ -85,7 +85,7 @@ $scope.removePost = function(index)
         
 
 
-		$http({method: 'POST', url: 'http://staze.org/note?method=delete&id='+$scope.wynik[index].id}).success(function(data)
+		$http({method: 'POST', url: baseUrl+'note?method=delete&id='+$scope.wynik[index].id}).success(function(data)
 		 {
 			 console.log("wyslanie postu....");
 			 request_baza(link_all);
