@@ -10,6 +10,11 @@ class LoginController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $this->view->form = new Application_Form_Login();
+    }
+
+    public function loginAction()
+    {
         $form = new Application_Form_Login();
         if ($form->isValid($_POST)) {
             $adapter = new Zend_Auth_Adapter_DbTable(  
@@ -25,7 +30,6 @@ class LoginController extends Zend_Controller_Action
 
             $auth = Zend_Auth::getInstance();
             $result = $auth->authenticate($adapter);
-
             if ($result->isValid()) {
                 //Zend_Session::rememberMe(60 * 10);
                 Zend_Session::start();
@@ -37,7 +41,12 @@ class LoginController extends Zend_Controller_Action
             }
             $form->password->addError('Bledna proba logowania!');
         }
-        $this->view->form = $form;
+        
+        $this->_helper->redirector(
+                    'index',
+                    'login',
+                    'default'
+        );
     }
 
     public function logoutAction()

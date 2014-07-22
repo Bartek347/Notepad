@@ -5,7 +5,8 @@ class Application_Form_Login extends Zend_Form
 
     public function init()
     {
-        $this->setMethod('post');
+        $this->setMethod('post')
+             ->setAction('login/login');
 
         $this->addElement('hidden', 'plaintext', array(
             'description' => 'Zaloguj się',
