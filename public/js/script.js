@@ -6,20 +6,29 @@ function commentsController($scope, $http)
 	var link_all = 'http://staze.org/note?method=index';
 
 	console.log(baseUrl);
+
+		function data_cut(dana) {
+			var dana;
+			var str = dana;
+			var res = str.substring(34, str.length-8);
+			return res ;
+		} ;
+
+	
 	
 
 		function request_baza(link) {
 
 		$http({method: 'POST', url: link }).success(function(data)
 					{
-						$scope.posts = data; // response data 
-						var str = data;
-						var res = str.substring(34, str.length-8);
+						$scope.posts = data;
+						var res = data_cut(data);
 						$scope.wynik = angular.fromJson(res);
 				    });
 
     return $scope.wynik ;                
 };
+
 
 
 request_baza(link_all);
@@ -57,8 +66,7 @@ $scope.showPost = function(index,n){
 		$http({method: 'POST', url: 'http://staze.org/note?method=show&id='+$scope.wynik[index].id}).success(function(data)
 			{
 				$scope.posts = data; // response data 
-				var str = data;
-				var res = str.substring(25, str.length-5);
+				var res = data_cut(data);
 				$scope.wynik = angular.fromJson(res);
 				$scope.wynik.splice(index,1);
 
