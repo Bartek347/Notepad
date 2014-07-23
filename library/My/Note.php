@@ -28,7 +28,7 @@ class My_Note
             $i++;
         }
 
-        $show = $tool->createXml1($json_tab); 
+        $show = $tool->createXml($json_tab); 
         
         return $show;
     }
@@ -51,7 +51,7 @@ class My_Note
                 'username' => $user
         );
 
-        $show = $tool->createXml2($json_tab); 
+        $show = $tool->createXml(array($json_tab)); 
         return $show;
     }
 
