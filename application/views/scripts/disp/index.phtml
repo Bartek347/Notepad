@@ -70,8 +70,31 @@
                 </section>
             </form>
         </section>
+    
+<div>
+  
+  <table>
+    <tr>
+      <td>Directive</td>
+      <td>How</td>
+      <td>Source</td>
+      <td>Rendered</td>
+    </tr>
+ 
+    <tr id="bind-html-with-trust">
+      <td>ng-bind-html</td>
+      <td>Bypass $sanitize by explicitly trusting the dangerous value</td>
+      <td>
+      <pre>&lt;div ng-bind-html="deliberatelyTrustDangerousSnippet()"&gt;
+&lt;/div&gt;</pre>
+      </td>
+      <td><div ng-bind-html="deliberatelyTrustDangerousSnippet()"></div></td>
+   
+  </table>
+  </div>
 
 <script type="text/javascript" src="<?php echo $this->baseUrl("$angularjs"); ?>"></script>
+
 <script src="<?php echo $this->baseUrl('js/bootstrap.js'); ?>" ></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl("$skrypt"); ?>"></script>
     </body>

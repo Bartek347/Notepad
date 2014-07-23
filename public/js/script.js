@@ -1,4 +1,4 @@
-function commentsController($scope, $http)
+function commentsController($scope, $http, $sce)
 {
 
 
@@ -7,18 +7,15 @@ function commentsController($scope, $http)
 	console.log(baseUrl);
 
 		function data_cut(dana) {
-			var dana;
-			var str = dana;
-			var res = str.substring(34, str.length-8);
-			return res ;
+				var dana;
+				var str = dana;
+				var res = str.substring(34, str.length-8);
+						return res ;
 		} ;
 
+				
+		
 
-
-
-
-	
-	
 
 
 		function request_baza(link) {
@@ -28,36 +25,51 @@ function commentsController($scope, $http)
 						$scope.posts = data;
 						var res = data_cut(data);
 						$scope.wynik = angular.fromJson(res);
+						janek = $scope.wynik[0].description;
+
+        	
+        				console.log(janek);
+        					$scope.snippet =
+          '<p style="color:blue">an html\n' +
+          '<em onmouseover="this.textContent=\'PWN3D!\'">click here</em>\n' +
+          'snippet</p>';
+        $scope.deliberatelyTrustDangerousSnippet = function() {
+
+
+          return $sce.trustAsHtml($scope.snippet);
+          console.log($scope.snippet);
+        };
+
+
+
+						
 				    });
-
-    return $scope.wynik ;                
+   						 return $scope.wynik ;                
 };
-
-
-
 request_baza(link_all);
 
-
-$scope.submitForm = function()
-	{
-        
-        formData = $scope.form;
-        console.log(formData);
-    	console.log(formData.title);
-		var inde = 'index';
-
-		$http({method: 'POST', url: baseUrl+'note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
-		 {
-			 console.log("wyslanie postu....");
-			 $scope.form = "";
-
-			 request_baza(link_all);
+			
+		
 
 
-		 });
+			$scope.submitForm = function()
+				{
+			        
+			        formData = $scope.form;
+			        console.log(formData);
+			    	console.log(formData.title);
+					var inde = 'index';
+
+					$http({method: 'POST', url: baseUrl+'note?method=add&title='+formData.title+'&content='+formData.content}).success(function(data)
+					 {
+						 console.log("wyslanie postu....");
+						 $scope.form = "";
+						 
+						 request_baza(link_all);
+					 });
 
 
-    };
+			    };
 
 $scope.showPost = function(index,n){
 		n = 1;
@@ -73,8 +85,6 @@ $scope.showPost = function(index,n){
 				var res = data_cut(data);
 				$scope.wynik = angular.fromJson(res);
 				$scope.wynik.splice(index,1);
-
-
 		    });
  };
 
@@ -82,21 +92,10 @@ $scope.showPost = function(index,n){
 
 $scope.removePost = function(index)
 	{
-        
-
-
 		$http({method: 'POST', url: baseUrl+'note?method=delete&id='+$scope.wynik[index].id}).success(function(data)
 		 {
 			 console.log("wyslanie postu....");
 			 request_baza(link_all);
-
-
 		 });
-
-
     };
-
-
-
-
 }
