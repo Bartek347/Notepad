@@ -12,19 +12,10 @@ class My_Tools {
         return $user;
     }
 
-    public function createXml1($tab) {
+    public function createXml($tab) {
 
     	$json = json_encode($tab);
         $xml = '<a>' . '<![CDATA[' . $json . ']]>' . '</a>';
-        $result = simplexml_load_string($xml);
-        return $result;
-    }
-
-    public function createXml2($tab) {
-
-    	$json = json_encode($tab);
-        $res = '[' . $json . ']';
-        $xml = '<a>' . '<![CDATA[' . $res . ']]>' . '</a>';
         $result = simplexml_load_string($xml);
         return $result;
     }

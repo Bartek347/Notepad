@@ -16,7 +16,7 @@ function commentsController($scope, $http, $sce)
 				
 		
 
-
+console.log();
 
 		function request_baza(link) {
 
