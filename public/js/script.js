@@ -14,7 +14,7 @@ function commentsController($scope, $http)
 		} ;
 
 
-
+console.log();
 
 
 	
